@@ -1,0 +1,19 @@
+{% extends 'shortener/base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>Готово!</h2>
+        <div class="alert alert-success">
+            <p><strong>Исходная ссылка:</strong></p>
+            <p style="word-wrap: break-word;">{{ url.original_url }}</p>
+            <p><strong>Короткая ссылка:</strong></p>
+            <p style="word-wrap: break-word;">
+                <a href="{% url 'redirect' url.short_url %}">
+                    {{ request.get_host }}/{{ url.short_url }}
+                </a>
+            </p>
+        </div>
+        <a href="{% url 'create' %}" class="btn btn-primary">Создать ещё</a>
+    </div>
+</div>
+{% endblock %}

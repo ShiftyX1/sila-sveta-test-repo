@@ -1,0 +1,28 @@
+{% extends 'shortener/base.html' %}
+{% block content %}
+<h2>Все ссылки</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th style="width: 60%">Исходная ссылка</th>
+                <th style="width: 25%">Короткая ссылка</th>
+                <th style="width: 15%">Дата создания</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for url in urls %}
+            <tr>
+                <td style="word-wrap: break-word; max-width: 0;">
+                    <a href="{{ url.original_url }}" target="_blank">{{ url.original_url }}</a>
+                </td>
+                <td style="word-wrap: break-word; max-width: 0;">
+                    <a href="{% url 'redirect' url.short_url %}">{{ request.get_host }}/{{ url.short_url }}</a>
+                </td>
+                <td>{{ url.created_at|date:"d.m.Y H:i" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
